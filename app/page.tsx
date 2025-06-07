@@ -2,6 +2,31 @@
 
 import { useQuery } from '@tanstack/react-query';
 
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    };
+  };
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
+}
+
+
 const fetchUsers = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/users');
   if (!res.ok) throw new Error('Failed to fetch');
@@ -19,7 +44,7 @@ export default function UsersPage() {
 
   return (
     <ul>
-      {data.map(user => (
+      {data.map((user: User) => (
         <li key={user.id}>{user.name}</li>
       ))}
     </ul>
